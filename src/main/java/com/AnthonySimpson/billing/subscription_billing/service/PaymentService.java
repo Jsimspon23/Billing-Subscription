@@ -19,5 +19,7 @@ public class PaymentService {
         return paymentRepository.save(payment);
     }
 
-    
+    public Payment findById(Long id) {
+        return paymentRepository.findById(id).orElseThrow(() -> new RuntimeException("Payment Not Found "));
+    }
 }

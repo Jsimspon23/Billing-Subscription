@@ -19,4 +19,7 @@ public class InvoiceService {
         return invoiceRepository.save(invoice);
     }
     
+    public Invoice findById(Long id) {
+        return invoiceRepository.findById(id).orElseThrow(() -> new RuntimeException("Invoice Not Found "));
+    }
 }
