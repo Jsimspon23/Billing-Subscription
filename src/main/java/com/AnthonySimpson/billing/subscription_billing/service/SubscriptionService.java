@@ -48,4 +48,9 @@ public class SubscriptionService {
 
         return subscriptionRepository.save(subscription);
     }
+
+    public Subscription findById(Long id) {
+        return subscriptionRepository.findById(id).orElseThrow(() -> new RuntimeException("Subsciption not found"));
+    }
+    
 }

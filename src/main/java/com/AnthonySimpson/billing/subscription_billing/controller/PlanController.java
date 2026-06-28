@@ -7,27 +7,27 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.AnthonySimpson.billing.subscription_billing.domain.Customer;
-import com.AnthonySimpson.billing.subscription_billing.service.CustomerService;
+import com.AnthonySimpson.billing.subscription_billing.domain.Plan;
+import com.AnthonySimpson.billing.subscription_billing.service.PlanService;
 
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/api/customers")
+@RequestMapping("/api/plans")
 @RequiredArgsConstructor
 
-public class CustomerController {
-
-    private final CustomerService customerService;
+public class PlanController {
+    
+    private final PlanService planService;
 
     @PostMapping
-    public Customer createCustomer(@RequestBody Customer customer) {
-        return customerService.createCustomer(customer);
+    public Plan createPlan(@RequestBody Plan plan) {
+        return planService.createPlan(plan);
     }
 
-    @GetMapping("/{id}")
-    public Customer getCustomerById(@PathVariable Long id) {
-        return customerService.findById(id);
+    @GetMapping("/{id}") 
+    public Plan getPlanById(@PathVariable Long id ) {
+        return planService.findById(id);
     }
 
 }
