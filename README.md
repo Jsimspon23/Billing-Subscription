@@ -13,10 +13,10 @@ A backend REST API built with Java, Spring Boot, Maven, and PostgreSQL that mana
 - Stripe API key
 ### Installation
 
-Clone the repo
-Configure your database credentials in application.properties
-Add your Stripe API key to application.properties
-Run with mvn spring-boot:run
+1. Clone the repo
+2. Configure your database credentials in application.properties
+3. Add your Stripe API key to application.properties
+4. Run with mvn spring-boot:run
 
 ## API Endpoints
 ### Customer
