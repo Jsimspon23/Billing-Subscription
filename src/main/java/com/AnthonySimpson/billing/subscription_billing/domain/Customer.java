@@ -23,6 +23,7 @@ public class Customer {
     Long id;
     String firstName;
     String lastName;
+    String  stripeCustomerId;
     @Column(unique = true)
     String email;
     LocalDateTime createdAt;
