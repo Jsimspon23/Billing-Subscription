@@ -9,6 +9,7 @@ import com.AnthonySimpson.billing.subscription_billing.dto.SubscriptionResponse;
 import com.stripe.Stripe;
 import com.stripe.param.CustomerCreateParams;
 import com.stripe.param.SubscriptionCreateParams;
+import com.stripe.param.SubscriptionListParams;
 import com.stripe.exception.StripeException;
 import com.stripe.param.CustomerUpdateParams;
 import com.stripe.param.PaymentMethodAttachParams;
@@ -43,6 +44,18 @@ public class StripeService {
         if (customer.getStripeCustomerId() == null) {
             throw new IllegalStateException(" Customer has not been synced to Stripe yet.");
         }
+
+        SubscriptionListParams listParams  =  SubscriptionListParams.builder().setCustomer(customer.getStripeCustomerId()).build();
+        com.stripe.model.SubscriptionCollection subscriptions = com.stripe.model.Subscription.list(listParams);
+
+
+        for(com.stripe.model.Subscription sub : subscriptions.getData()) {
+             String status = sub.getStatus();
+            if (status.equals("active") || status.equals("trialing")) {
+                throw new IllegalStateException("Customer already has an active or trailing subcription.");
+            }
+        }
+
         SubscriptionCreateParams params = SubscriptionCreateParams.builder().setCustomer(customer.getStripeCustomerId()).addItem(SubscriptionCreateParams.Item.builder().setPrice("price_1TtwsgDpPqiqPEYCz1KfMqgv").build()).build();
 
         com.stripe.model.Subscription stripeSubscription = com.stripe.model.Subscription.create(params);
